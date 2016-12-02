@@ -8,4 +8,8 @@ import java.nio.file.Path;
 public interface IArgumentsParser {
     Path parseDocumentPath(String[] args);
     UserRequest parseUserRequest(String[] args);
+
+    int parseChapterNumber(String[] args);
+    int parseArticleNumber(String[] args);
+    ArticleRange parseArticleRange(String[] args);
 }
