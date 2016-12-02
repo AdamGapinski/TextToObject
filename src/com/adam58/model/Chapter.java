@@ -17,6 +17,7 @@ public class Chapter {
     }
 
     public interface IChapterBuilder {
+        void setTitle(String title);
         boolean addArticle(Article article);
         boolean addArticlesIntroductionContent(String content);
         boolean addIntroductionNewLine();

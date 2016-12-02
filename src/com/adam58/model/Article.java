@@ -10,9 +10,8 @@ public class Article {
         return super.toString();
     }
 
-
-
     public interface IArticleBuilder {
+        void setTitle(String title);
         void addContent(String content);
         void addNewLine();
         Article createArticle();
