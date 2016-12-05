@@ -5,7 +5,7 @@ import java.nio.file.Path;
 /**
  * @author Adam Gapiński
  */
-public interface IArgumentsParser {
+public interface IArgumentParser {
     Path parseDocumentPath(String[] args);
     UserRequest parseUserRequest(String[] args);
 
