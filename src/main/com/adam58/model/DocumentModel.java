@@ -1,6 +1,5 @@
 package com.adam58.model;
 
-import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class DocumentModel implements IDocumentModel {
     private List<Chapter> chapters;
 
     @Override
-    public void loadDocument(Path documentFilePath) throws FileNotFoundException {
+    public void loadDocument(Path documentFilePath) throws DocumentNotFoundException {
         parser.parseDocument(documentFilePath);
 
         articles = parser.getArticles();
