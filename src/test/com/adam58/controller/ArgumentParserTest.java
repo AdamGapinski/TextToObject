@@ -89,7 +89,7 @@ public class ArgumentParserTest {
         assertEquals(lastArticle, articleRange.lastArticleNumber);
     }
 
-    @Test(expected = ArgumentParser.NotEnoughArgumentsException.class)
+    @Test(expected = NotEnoughArgumentsException.class)
     public void notEnoughArgumentsExceptionRange() throws Exception {
         String[] args = {
                 "/test/test", "-ar", "4"
@@ -97,7 +97,7 @@ public class ArgumentParserTest {
         ArticleRange articleRange = parser.parseArticleRange(args);
     }
 
-    @Test(expected = ArgumentParser.NotEnoughArgumentsException.class)
+    @Test(expected = NotEnoughArgumentsException.class)
     public void notEnoughArgumentsException() throws Exception {
         String[] args = {
                 "/test/test"

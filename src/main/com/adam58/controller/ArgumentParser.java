@@ -11,7 +11,7 @@ public class ArgumentParser implements IArgumentParser {
     @Override
     public Path parseDocumentPath(String[] args) {
         if (args.length == 0) {
-            throw new NotEnoughArgumentsException("Not file path specified.");
+            throw new NotEnoughArgumentsException("No file path specified.");
         }
 
         try {
@@ -28,18 +28,18 @@ public class ArgumentParser implements IArgumentParser {
         }
 
         String requestString = args[1];
-        requestString = requestString.substring(1, requestString.length());
+        requestString = requestString.substring(1, requestString.length()).toUpperCase();
 
         UserRequest userRequest;
         switch (requestString) {
-            case "ch":
-            case "c":
+            case "CH":
+            case "C":
                 userRequest = UserRequest.Chapter;
                 break;
-            case "a":
+            case "A":
             userRequest = UserRequest.SingleArticle;
                 break;
-            case "ar":
+            case "AR":
                 userRequest = UserRequest.ArticleRange;
                 break;
             default:
@@ -104,10 +104,5 @@ public class ArgumentParser implements IArgumentParser {
         return number;
     }
 
-    public static class NotEnoughArgumentsException extends RuntimeException {
-        public NotEnoughArgumentsException(String message) {
-            super(message);
-        }
-    }
 }
 
