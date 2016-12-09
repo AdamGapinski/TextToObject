@@ -20,12 +20,30 @@ public class DocumentModel implements IDocumentModel {
     }
 
     @Override
-    public Chapter getChapter(int chapterNumber) {
+    public Chapter getChapter(int chapterNumber) throws NoSuchDocumentElementException{
+        chapterNumber -= 1;
+
+        if (chapterNumber < 0 || chapterNumber >= chapters.size()) {
+            throw new NoSuchDocumentElementException("Chapter " + chapterNumber + ". not exists");
+        }
+
         return chapters.get(chapterNumber);
     }
 
     @Override
-    public Article getArticle(int articleNumber) {
+    public Article getArticle(int articleNumber) throws NoSuchDocumentElementException{
+        articleNumber -= 1;
+
+        if (articleNumber < 0 || articleNumber >= articles.size()) {
+            throw new NoSuchDocumentElementException("Article " + articleNumber + ". not exists");
+        }
+
         return articles.get(articleNumber);
+    }
+
+    public static class NoSuchDocumentElementException extends Exception {
+        public NoSuchDocumentElementException(String message) {
+            super(message);
+        }
     }
 }
