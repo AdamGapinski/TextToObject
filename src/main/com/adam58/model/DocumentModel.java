@@ -21,24 +21,22 @@ public class DocumentModel implements IDocumentModel {
 
     @Override
     public Chapter getChapter(int chapterNumber) throws NoSuchDocumentElementException{
-        chapterNumber -= 1;
 
-        if (chapterNumber < 0 || chapterNumber >= chapters.size()) {
+        if (chapterNumber < 1 || chapterNumber >= chapters.size()) {
             throw new NoSuchDocumentElementException("Chapter " + chapterNumber + ". not exists");
         }
 
-        return chapters.get(chapterNumber);
+        return chapters.get(chapterNumber - 1);
     }
 
     @Override
     public Article getArticle(int articleNumber) throws NoSuchDocumentElementException{
-        articleNumber -= 1;
 
-        if (articleNumber < 0 || articleNumber >= articles.size()) {
+        if (articleNumber < 1 || articleNumber >= articles.size()) {
             throw new NoSuchDocumentElementException("Article " + articleNumber + ". not exists");
         }
 
-        return articles.get(articleNumber);
+        return articles.get(articleNumber - 1);
     }
 
     public static class NoSuchDocumentElementException extends Exception {

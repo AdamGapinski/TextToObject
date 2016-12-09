@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Adam Gapiński
  */
 public class DocumentView implements IDocumentView {
-    private final int MAX_LINE_LENGTH = 130;
+    private final int MAX_LINE_LENGTH = 110;
     private IDocumentModel documentModel;
 
     public DocumentView(IDocumentModel documentModel) {

@@ -23,7 +23,9 @@ Controller implements IController {
             Path path = argumentParser.parseDocumentPath(args);
             UserRequest userRequest = argumentParser.parseUserRequest(args);
 
+            documentModel = new DocumentModel();
             documentModel.loadDocument(path);
+            documentView = new DocumentView(documentModel);
 
             switch (userRequest) {
                 case Chapter:

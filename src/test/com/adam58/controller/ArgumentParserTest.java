@@ -23,7 +23,7 @@ public class ArgumentParserTest {
     @Test
     public void parseDocumentPath() throws Exception {
         String[] args = {
-                "/home/adam/Idea Projects/TextToObject_Lab8/resources/test/test", "..."
+                "/home/adam/Idea Projects/TextToObject_Lab8/resources/konstytucja.txt/konstytucja.txt", "..."
         };
 
         Path path = parser.parseDocumentPath(args);
@@ -34,7 +34,7 @@ public class ArgumentParserTest {
     @Test
     public void parseUserRequest() throws Exception {
         String[] args = {
-                "/test/test", "-a"
+                "/test/konstytucja.txt", "-a"
         };
         UserRequest request;
 
@@ -58,7 +58,7 @@ public class ArgumentParserTest {
     @Test
     public void parseChapterNumber() throws Exception {
         String[] args = {
-                "/test/test", "-c", "4"
+                "/test/konstytucja.txt", "-c", "4"
         };
 
         Integer chapterNumber = parser.parseChapterNumber(args);
@@ -68,7 +68,7 @@ public class ArgumentParserTest {
     @Test
     public void parseArticleNumber() throws Exception {
         String[] args = {
-                "/test/test", "-a", "4"
+                "/test/konstytucja.txt", "-a", "4"
         };
 
         Integer chapterNumber = parser.parseArticleNumber(args);
@@ -78,7 +78,7 @@ public class ArgumentParserTest {
     @Test
     public void parseArticleRange() throws Exception {
         String[] args = {
-                "/test/test", "-ar", "4 5"
+                "/test/konstytucja.txt", "-ar", "4 5"
         };
         int firstArticle = Integer.valueOf(args[2].split(" ")[0]);
         int lastArticle = Integer.valueOf(args[2].split(" ")[1]);
@@ -92,7 +92,7 @@ public class ArgumentParserTest {
     @Test(expected = NotEnoughArgumentsException.class)
     public void notEnoughArgumentsExceptionRange() throws Exception {
         String[] args = {
-                "/test/test", "-ar", "4"
+                "/test/konstytucja.txt", "-ar", "4"
         };
         ArticleRange articleRange = parser.parseArticleRange(args);
     }
@@ -100,7 +100,7 @@ public class ArgumentParserTest {
     @Test(expected = NotEnoughArgumentsException.class)
     public void notEnoughArgumentsException() throws Exception {
         String[] args = {
-                "/test/test"
+                "/test/konstytucja.txt"
         };
         UserRequest userRequest = parser.parseUserRequest(args);
     }
