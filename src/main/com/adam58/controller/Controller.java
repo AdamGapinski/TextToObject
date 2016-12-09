@@ -41,7 +41,10 @@ Controller implements IController {
                 default:
             }
 
-        } catch (DocumentNotFoundException | ArgumentParser.NotEnoughArgumentsException | IllegalArgumentException e) {
+        } catch (DocumentNotFoundException |
+                NotEnoughArgumentsException |
+                IllegalArgumentException e) {
+
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("something went wrong");

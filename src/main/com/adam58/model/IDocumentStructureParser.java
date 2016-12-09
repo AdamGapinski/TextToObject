@@ -8,8 +8,8 @@ public interface IDocumentStructureParser {
     boolean isEndOfArticle(String line);
     boolean isNextChapter(String line);
     boolean isNextArticlesIntroduction(String line);
+    boolean isEndOfChapter(String line);
     boolean isRedundantLine(String line);
-    boolean isNewLine(String line);
-    boolean isConveyedToNewLine(String line);
-    String concatConveyed(String firstLine, String secondLine);
+    boolean isInNewLine(String line);
+    boolean isConveyanceEnding(String line);
 }

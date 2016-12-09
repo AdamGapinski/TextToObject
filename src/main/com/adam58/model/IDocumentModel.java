@@ -7,6 +7,6 @@ import java.nio.file.Path;
  */
 public interface IDocumentModel {
     void loadDocument(Path documentFilePath) throws DocumentNotFoundException;
-    Chapter getChapter(int chapterNumber);
-    Article getArticle(int articleNumber);
+    Chapter getChapter(int chapterNumber) throws DocumentModel.NoSuchDocumentElementException;
+    Article getArticle(int articleNumber) throws DocumentModel.NoSuchDocumentElementException;
 }
