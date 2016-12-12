@@ -32,7 +32,7 @@ public class DocumentModel implements IDocumentModel {
     @Override
     public Article getArticle(int articleNumber) throws NoSuchDocumentElementException{
 
-        if (articleNumber < 1 || articleNumber >= articles.size()) {
+        if (articleNumber < 1 || articleNumber > articles.size()) {
             throw new NoSuchDocumentElementException("Article " + articleNumber + ". not exists");
         }
 
