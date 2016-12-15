@@ -65,6 +65,34 @@ public class ArgumentParserTest {
         assertEquals(Integer.valueOf(args[2]), chapterNumber);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void parseChapterNumberInvalid() throws Exception {
+        String[] args = {
+                "/test/konstytucja.txt", "-c", "ad"
+        };
+
+        parser.parseChapterNumber(args);
+    }
+
+    @Test
+    public void parseChapterRomanNumber() throws Exception {
+        String[] args = {
+                "/test/konstytucja.txt", "-c", "XIII"
+        };
+
+        Integer chapterNumber = parser.parseChapterNumber(args);
+        assertEquals(new Integer(13), chapterNumber);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void parseChapterRomanNumberInvalid() throws Exception {
+        String[] args = {
+                "/test/konstytucja.txt", "-c", "A"
+        };
+
+        parser.parseChapterNumber(args);
+    }
+
     @Test
     public void parseArticleNumber() throws Exception {
         String[] args = {

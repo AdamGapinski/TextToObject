@@ -3,6 +3,7 @@ package com.adam58.controller;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * @author Adam Gapiński
@@ -55,7 +56,7 @@ public class ArgumentParser implements IArgumentParser {
             throw new NotEnoughArgumentsException("Chapter number not specified");
         }
 
-        return parseNumber(args[2], "chapter");
+        return parseChapterNumber(args[2]);
     }
 
     @Override
@@ -102,6 +103,29 @@ public class ArgumentParser implements IArgumentParser {
         }
 
         return number;
+    }
+
+    private int parseChapterNumber(String stringNumber) {
+        int number;
+
+        number = parseRomanChapterNumber(stringNumber);
+
+        if (number == -1) {
+            number = parseNumber(stringNumber, "chapter");
+        }
+
+        return number;
+    }
+
+    private int parseRomanChapterNumber(String stringNumber) {
+        stringNumber = stringNumber.toUpperCase();
+
+        String[] romanNumber = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                "XI", "XII", "XIII",};
+
+        int index = Arrays.asList(romanNumber).indexOf(stringNumber);
+
+        return index == -1 ? -1 : index + 1;
     }
 
 }
