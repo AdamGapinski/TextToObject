@@ -22,7 +22,7 @@ public class DocumentModel implements IDocumentModel {
     @Override
     public Chapter getChapter(int chapterNumber) throws NoSuchDocumentElementException{
 
-        if (chapterNumber < 1 || chapterNumber >= chapters.size()) {
+        if (chapterNumber < 1 || chapterNumber > chapters.size()) {
             throw new NoSuchDocumentElementException("Chapter " + chapterNumber + ". not exists");
         }
 

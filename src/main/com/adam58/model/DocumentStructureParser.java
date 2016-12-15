@@ -59,7 +59,9 @@ public class DocumentStructureParser implements IDocumentStructureParser {
     public boolean isInNewLine(String line) {
         String[] tokens = line.split(" ");
 
-        return tokens.length != 0 && (Character.isDigit(tokens[0].charAt(0))) && tokens[0].endsWith(".");
+        return tokens.length != 0 &&
+                (Character.isDigit(tokens[0].charAt(0))) &&
+                (tokens[0].endsWith(".") || tokens[0].endsWith(")"));
     }
 
     @Override
