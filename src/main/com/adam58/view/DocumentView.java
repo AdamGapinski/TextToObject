@@ -1,10 +1,7 @@
 package com.adam58.view;
 
 import com.adam58.controller.ArticleRange;
-import com.adam58.model.Article;
-import com.adam58.model.DocumentModel;
-import com.adam58.model.IDocumentModel;
-import com.adam58.model.Introduction;
+import com.adam58.model.*;
 
 import java.util.Map;
 
@@ -12,8 +9,9 @@ import java.util.Map;
  * @author Adam Gapiński
  */
 public class DocumentView implements IDocumentView {
-    private final int MAX_LINE_LENGTH = 110;
+    private final int CONSOLE_WIDTH = 110;
     private IDocumentModel documentModel;
+    private final int MIN_LINE_LENGTH = 18;
 
     public DocumentView(IDocumentModel documentModel) {
         this.documentModel = documentModel;
@@ -23,9 +21,10 @@ public class DocumentView implements IDocumentView {
     public void printChapter(int chapterNumber) {
         try {
 
-            Map<Article, Introduction> articleIntroductionMap = documentModel
-                    .getChapter(chapterNumber)
-                    .getArticleIntroductionMap();
+            Chapter chapter = documentModel.getChapter(chapterNumber);
+            System.out.println(chapter);
+
+            Map<Article, Introduction> articleIntroductionMap = chapter.getArticleIntroductionMap();
 
             Introduction introduction = null;
             for (Map.Entry<Article, Introduction> entry : articleIntroductionMap.entrySet()) {
@@ -34,17 +33,17 @@ public class DocumentView implements IDocumentView {
                 if (introduction == null || articleIntroductionMap.get(article) != introduction) {
                     introduction = articleIntroductionMap.get(article);
 
-                    introduction.getContent().forEach(this::printLine);
+                    introduction.getContent().forEach(this::printLineToConsole);
                 }
 
-                printLine(article.toString());
-                article.getContentLines().forEach(this::printLine);
+                printLineToConsole(article.toString());
+                article.getContentLines().forEach(this::printLineToConsole);
 
                 System.out.println();
             }
 
         } catch (DocumentModel.NoSuchDocumentElementException e) {
-            printLine(e.getMessage());
+            printLineToConsole(e.getMessage());
         }
     }
 
@@ -53,11 +52,11 @@ public class DocumentView implements IDocumentView {
         try {
             Article article = documentModel.getArticle(articleNumber);
 
-            printLine(article);
-            article.getContentLines().forEach(this::printLine);
+            printLineToConsole(article);
+            article.getContentLines().forEach(this::printLineToConsole);
 
         } catch (DocumentModel.NoSuchDocumentElementException e) {
-            printLine(e.getMessage());
+            printLineToConsole(e.getMessage());
         }
     }
 
@@ -69,24 +68,25 @@ public class DocumentView implements IDocumentView {
             }
     }
 
-    private void printLine(Object object) {
-        String line = object.toString();
+    private void printLineToConsole(Object object) {
+        String line = object.toString().trim();
 
-        int lastIndex = line.lastIndexOf(" ", MAX_LINE_LENGTH);
+        int lastIndex = line.lastIndexOf(" ", CONSOLE_WIDTH);
 
-        while (line.length() > MAX_LINE_LENGTH && lastIndex != -1) {
+        while (line.length() - CONSOLE_WIDTH > MIN_LINE_LENGTH && lastIndex != -1) {
 
             System.out.println(line.substring(0, lastIndex));
-            line = line.trim();
 
             if (lastIndex + 1 < line.length()) {
-                line = line.substring(lastIndex + 1);
+                line = line.substring(lastIndex + 1).trim();
             }
 
-            lastIndex = line.lastIndexOf(" ", MAX_LINE_LENGTH);
+            lastIndex = line.lastIndexOf(" ", CONSOLE_WIDTH);
         }
 
-        System.out.println(line);
+        if (line.length() != 0) {
+            System.out.println(line);
+        }
 
     }
 
