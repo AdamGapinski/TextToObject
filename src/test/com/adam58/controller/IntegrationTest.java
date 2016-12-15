@@ -36,7 +36,7 @@ public class IntegrationTest {
     @Test
     public void handleUserInputReadChapter() throws Exception {
         String[] args = {
-                "resources/test/konstytucja.txt", "-CH", "9"
+                "resources/test/konstytucja.txt", "-CH", "IX"
         };
 
         controller.handleUserInput(args);
@@ -54,7 +54,10 @@ public class IntegrationTest {
         args[2] = "-4";
         controller.handleUserInput(args);
 
-        args[2] = "243";
+        args[2] = "244";
+        controller.handleUserInput(args);
+
+        args[2] = "0";
         controller.handleUserInput(args);
     }
 
