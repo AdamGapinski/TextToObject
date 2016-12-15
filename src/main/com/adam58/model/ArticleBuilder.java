@@ -9,7 +9,6 @@ import java.util.List;
 public class ArticleBuilder implements Article.IArticleBuilder {
     private String title;
     private List<String> contentLines = new LinkedList<>();
-    private boolean concatToLast = false;
 
     public ArticleBuilder(String title) {
         this.title = title;
@@ -21,19 +20,17 @@ public class ArticleBuilder implements Article.IArticleBuilder {
 
     @Override
     public void addContent(String content, boolean inNewLine) {
+        content = content.trim();
 
         if (inNewLine || contentLines.size() == 0) {
             contentLines.add(content);
         } else {
 
-        /*concat to last line*/
-        int lastIndex = contentLines.size() - 1;
+            /*concat to last line*/
+            int lastElementIndex = contentLines.size() - 1;
+            String concatenatedLine = contentLines.get(lastElementIndex).concat(" ").concat(content);
 
-        String newLine = contentLines.get(lastIndex);
-        newLine = newLine.concat(content);
-
-        contentLines.remove(lastIndex);
-        contentLines.add(newLine);
+            contentLines.set(lastElementIndex, concatenatedLine);
         }
     }
 

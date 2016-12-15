@@ -23,6 +23,8 @@ public class DocumentParser implements IDocumentParser {
     public void parseDocument(Path document) throws DocumentNotFoundException {
         try (Scanner scanner = new Scanner(new FileReader(new File(document.toString())))) {
 
+            String lineToSave = "";
+
             while(scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
 
@@ -30,7 +32,14 @@ public class DocumentParser implements IDocumentParser {
                 boolean isTitleLine = startDocumentElement(line);
 
                 if (!isTitleLine && !structureParser.isRedundantLine(line)) {
-                    saveLine(line);
+
+                    if (structureParser.isConveyanceEnding(line)) {
+                        lineToSave = lineToSave.concat(line.substring(0, line.length() - 1));
+
+                    } else {
+                        saveLine(lineToSave.concat(line));
+                        lineToSave = "";
+                    }
                 }
             }
 
@@ -75,13 +84,8 @@ public class DocumentParser implements IDocumentParser {
         if (structureParser.isNextArticlesIntroduction(line)) {
             chapterBuilder.addArticlesIntroductionContent(line);
 
-        } else if (structureParser.isConveyanceEnding(line)) {
-
-            line = line.substring(0, line.length() - 1);
-            articleBuilder.addContent(line, structureParser.isInNewLine(line));
-
         } else {
-            articleBuilder.addContent(line + " ", structureParser.isInNewLine(line));
+            articleBuilder.addContent(line, structureParser.isInNewLine(line));
         }
     }
 
